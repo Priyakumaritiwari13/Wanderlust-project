@@ -1,0 +1,134 @@
+<%layout("/layouts/boilerplate")%>
+
+<body>
+    <div class="card show-card col-md-6 offset-md-3">
+    <h3><b><%=showListing.title%></b></h3>
+  <img src="<%=showListing.image.url%>" class="card-img-top mb-2" style=" height:25rem;" alt="listings">
+  <div class="card-body">
+    <p class="card-text"><i>owned by <b><%=showListing.owner.username%></b></i></p>
+    <p class="card-text"><%=showListing.description%></p>
+        <p class="card-text"></p><b>Rent per day:</b> ₹<%=showListing.price.toLocaleString("en-IN")%></p>
+        <p class="card-text"></p><b>located at:</b> <%=showListing.location%></p>
+        <p class="card-text"></p><%=showListing.country%></p>
+    <%if(currUser&&currUser._id.equals(showListing.owner._id)){%>   
+        <div class="btns ">
+            <a class="btn edit-btn btn-dark " style="text-decoration: none;" href="/listings/<%=showListing._id%>/edit">
+                edit
+            </a>
+            <form action="/listings/<%=showListing._id%>?_method=DELETE" method="post">
+                <button class="btn  btn-danger ">delete</button>
+            </form>
+        </div>
+    <%}%>
+  </div>
+</div>
+
+ 
+<div class="col-md-6 offset-md-3">
+    <hr>
+     <% if(currUser){%>
+
+    <h4>Leave a review</h4>
+
+    <form action="/listings/<%= showListing._id %>/reviews" method="POST" novalidate class="needs-validation mb-2">
+        <div class="mb-3 mt-3">
+            <!-- <label for="rating" class="form-label">Rating</label>
+            <input type="range" name="review[rating]" min="1" max="5" id="rating" class="form-range"> -->
+<fieldset class="starability-slot">
+  <legend>Rating</legend>
+
+  <input type="radio" id="first-rate1" name="review[rating]" value="1"/>
+  <label for="first-rate1" title="Terrible">1 star</label>
+
+  <input type="radio" id="first-rate2" name="review[rating]" value="2"/>
+  <label for="first-rate2" title="Not good">2 stars</label>
+
+  <input type="radio" id="first-rate3" name="review[rating]" value="3"/>
+  <label for="first-rate3" title="Average">3 stars</label>
+
+  <input type="radio" id="first-rate4" name="review[rating]" value="4"/>
+  <label for="first-rate4" title="Very good">4 stars</label>
+
+  <input type="radio" id="first-rate5" name="review[rating]" value="5"/>
+  <label for="first-rate5" title="Amazing">5 stars</label>
+
+</fieldset>   
+
+        </div>
+        
+        <div class="mb-3 mt-3">
+
+            <label for="comment" class="form-labe>"></label>
+            <textarea name="review[comment]" id="comment" row="5" cols="30" class="form-control mb-1" placeholder="Write your Review here..." required></textarea>
+            <div class="invalid-feedback mb-2">
+                please add some comments for review
+            </div>
+        </div>
+        <button class="btn btn-outline-success">Submit</button><br>
+    </form>
+<% } %>
+
+
+<%if(showListing.reviews&&showListing.reviews.length){%>
+     <h4 style="text-align:center;">All Reviews</h4><hr>
+    <div class="reviews">
+        <%for(review of showListing.reviews){%>
+                 <div class="card border col-md-6 mb-3" style="width: 18rem;">
+                    <div class="card-body review-card">
+                <h5 class="card-title">@<%=review.commenter.username%></h5>
+               <small class="text-muted">
+                <%= dayjs(review.createdAt).fromNow() %>
+              </small>
+                <p class="card-text"><%=review.comment%></p>
+                 
+  <p class="starability-result" data-rating="<%=review.rating%>">
+    Rated:<%=review.rating%>star
+  </p>
+
+<% if(currUser && review.commenter && review.commenter._id.equals(currUser._id)) { %>
+  <form class="mb-1" action="/listings/<%=showListing._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
+        <button class=" delBtn btn btn-dark"><i class="fa-solid fa-box-archive"></i></button>
+  </form>
+<%}%>  
+                    </div>
+                    </div>
+                
+            <%}%>
+             </div>
+<%}%>
+<div class="maphead">
+    <h4>where you will be</h4>
+</div>
+             <div id="map" style="height: 20rem;margin: 1.5rem 0;"></div>
+    </div> 
+         
+</div>
+  
+<script>
+    const listing = <%- JSON.stringify(showListing) %>;
+    const coordinates= <%-JSON.stringify(showListing.geometry.coordinates)%>;
+    const tileUrl = "<%= tileUrl %>";
+</script>
+</body>
+<style>
+    @media (max-width:500px){
+        .reviews .card{
+            width: 180px !important;
+            height: auto !important;
+        }
+        .fa-box-archive{
+            font-size:12px !important;
+        }
+        .delBtn{
+            display: flex;
+            width:14px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+        p.card-text{
+            margin-bottom: 0.1rem;
+        }
+    }
+</style>
+

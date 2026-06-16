@@ -1,0 +1,272 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+     font-family: "Poppins", sans-serif !important;
+     font-style: normal;
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+}
+.container{
+    width: 100vw;
+    flex: 1 !important;
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.info-links{
+    height: 8rem;
+    background-color:#ebebeb;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sc-me-links,.brandName,.term-info{
+    width: 100%;
+}
+
+.info-links .sc-me-links a{
+    font-size: 1.5rem;
+    margin-right: 1.2rem;
+}
+
+.info-links .term-info a{
+    text-decoration: none;
+    margin-right: 1.2rem;
+    color: #222222;
+}
+
+.info-links .term-info a:hover{
+    text-decoration: underline;
+}
+
+.card{
+    border: none !important;
+    margin-bottom: 1.2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100%;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-link{
+    text-decoration: none;
+}
+.card-text p{
+  font-weight: 400 !important;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.show-card{
+    margin-top: 1.5rem;
+    
+}
+.show-card .card-img-top{
+    border-radius: 1rem !important;
+    object-fit:cover !important;
+    margin-bottom: 1.2rem !important;
+}
+.btns{
+    display: flex;
+    /* justify-content: space-evenly; */
+}
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    width: 8rem !important;
+    margin-right: 2rem;
+
+}
+.del-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    width: 8rem !important;
+}
+.reviews{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    column-gap: 1rem;
+
+}
+.review-card{
+    padding: 0.5rem 0.5rem 0rem 0.5rem !important;
+}
+
+#map{
+    border:.1rem solid green
+}
+        /* filter styling start */
+#filters{
+    display: flex;
+}
+.filter{
+    text-align: center;
+    margin-right: 3rem;
+    font-size:1rem; 
+    opacity: 0.7;
+}
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+ .filter>p{
+    font-size: 0.8rem;
+ }
+#icon{
+    font-size:1.4rem;
+}
+.taxToggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: .1rem solid black;
+    width: 15rem;
+    height: 3rem;
+    border-radius: 1rem;
+}
+.taxRate{
+    display: none;
+}
+.taxesAndFilter{
+    display: flex;
+    margin-bottom: 15px;
+}
+.categoryFilter{
+    width:100% !important;
+    display: flex !important;
+}
+        /* filter styling end */
+/*dropdown start*/
+/* button style */
+.custom-btn {
+    margin-left: 1rem;
+  border-radius: 1.8rem !important;
+  padding: 0.5rem 1rem !important;
+  background-color: #f7f7f7 !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+  font-weight: 500 !important;
+}
+
+.custom-btn:hover {
+  background-color: #eee !important;
+}
+
+/* dropdown menu */
+.custom-menu {
+  border-radius: 0.8rem !important;
+  padding: 0.5rem !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+/* dropdown items */
+.custom-menu .dropdown-item {
+  border-radius: 8px !important;
+  padding: 0.5rem 0.8rem !important;
+  transition: 0.2s !important;
+}
+
+.custom-menu .dropdown-item:hover {
+  background-color: #f1f1f1 !important;
+}
+
+/*selection style*/
+
+    select {
+  width: 250px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+select:hover {
+  border-color: #45a049;
+}
+
+/* Focus effect */
+select:focus {
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+/* Option styling (limited support) */
+option {
+  background-color: white;
+  color: black;
+}
+/*selection end*/
+@media(max-width:500px){
+/* scrollbar */
+#filters {
+    width: auto !important;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width:thin;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+#filters::-webkit-scrollbar{
+    height: 6px;
+}
+#filters::-webkit-scrollbar-track{
+    background-color: #eee;
+    border-radius: 10px;
+}
+#filters::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 10px;
+}
+#filters::-webkit-scrollbar-thumb{
+    background-color:#555;
+}
+#filters .filter{
+    min-width: 20px;
+    text-align: center;
+    scroll-snap-align: start;
+    cursor: pointer;
+}
+.categoryFilter{
+    gap: 10px;
+    width:100% !important;
+    display: flex !important;
+    flex-direction: column;
+}
+  
+}
