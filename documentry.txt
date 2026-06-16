@@ -1,0 +1,107 @@
+To show “2 minutes ago”, “1 hour ago”, etc.
+<%
+  const now = new Date();
+  const created = new Date(review.createdAt);
+  const diff = Math.floor((now - created) / 1000); // seconds
+
+  let timeAgo;
+
+  if (diff < 60) {
+    timeAgo = `${diff} seconds ago`;
+  } else if (diff < 3600) {
+    timeAgo = `${Math.floor(diff / 60)} minutes ago`;
+  } else if (diff < 86400) {
+    timeAgo = `${Math.floor(diff / 3600)} hours ago`;
+  } else {
+    timeAgo = `${Math.floor(diff / 86400)} days ago`;
+  }
+%>
+
+<small class="text-muted"><%= timeAgo %></small>
+////
+
+
+enum uses
+🔹 What is enum?
+
+enum means:
+👉 "Only allow specific values"
+
+It is a validation rule that restricts what can be stored in a field.
+
+🔥 Why we use enum
+1. ✅ Data consistency
+
+Without enum:
+
+"Goa"
+"goa"
+"GOA"
+
+👉 messy database 😵
+
+With enum:
+👉 only "goa" allowed → clean data
+
+2. ✅ Prevent user mistakes
+
+If user sends wrong value:
+
+category = "g0a"
+
+👉 enum blocks it automatically ❌
+
+3. ✅ Better filtering
+
+When you build filters later:
+
+Listing.find({ category: "goa" })
+
+👉 works perfectly because data is consistent
+
+⚡ Real-world use cases
+
+You’ll use enum for:
+
+Categories (like your project)
+User roles:
+role: {
+   type: String,
+   enum: ["user", "admin"]
+}
+Status:
+status: {
+   type: String,
+   enum: ["pending", "approved", "rejected"]
+}
+🚫 Without enum vs ✅ With enum
+❌ Without enum:
+category: String
+
+👉 Anything can go in → bad data
+
+✅ With enum:
+category: {
+   type: String,
+   enum: ["india", "goa", "dhanbad"]
+}
+
+👉 Controlled + safe data
+
+💡 Pro Tip (important for your project)
+
+Instead of hardcoding:
+
+enum: ["india", "goa", "dhanbad"]
+
+👉 Do this:
+
+const categories = ["india", "goa", "dhanbad"];
+
+category: {
+   type: String,
+   enum: categories
+}
+
+👉 Later you can reuse categories in frontend also 🔥
+
