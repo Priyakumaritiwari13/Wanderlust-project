@@ -1,5 +1,5 @@
 const Listing=require("../models/listing");
-const {getCoordinates}=require("../js/script.js");
+const {getCoordinates}=require("../script.js");
 
 module.exports.index=async(req,res,next)=>{
     let {searchItem,price}=req.query;
